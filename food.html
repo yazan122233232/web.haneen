@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>🍽️ قائمة الأكل الخيالية</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Changa:wght@600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    body {
+      font-family: 'Changa', sans-serif;
+      direction: rtl;
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #fff3e6 0%, #ffe6f7 100%);
+      animation: fadeIn 1.5s ease forwards;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glowPulse {
+      0%, 100% {
+        text-shadow:
+          0 0 8px #ff4e50,
+          0 0 20px #ff6a6a,
+          0 0 30px #ff4e50,
+          0 0 40px #ff4e50;
+        transform: scale(1);
+      }
+      50% {
+        text-shadow:
+          0 0 12px #ff6a6a,
+          0 0 28px #ff4e50,
+          0 0 38px #ff4e50,
+          0 0 50px #ff4e50;
+        transform: scale(1.03);
+      }
+    }
+    header {
+      background: linear-gradient(90deg, #ff5f6d, #ffc371);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      font-size: 3rem;
+      border-radius: 0 0 40px 40px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      animation: glowPulse 3s infinite ease-in-out;
+      user-select: none;
+      box-shadow: 0 6px 30px rgba(255, 79, 79, 0.7);
+    }
+    nav {
+      background-color: #222831;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 16px 0;
+      box-shadow: inset 0 -4px 15px #11161c;
+      user-select: none;
+    }
+    nav a {
+      color: #f7f7f7;
+      text-decoration: none;
+      padding: 14px 28px;
+      font-size: 20px;
+      margin: 0 10px;
+      border-radius: 22px;
+      font-weight: 700;
+      background: linear-gradient(145deg, #393e46, #2a2f36);
+      box-shadow:
+        3px 3px 6px #1a1d23,
+        -3px -3px 6px #50545c;
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+      position: relative;
+    }
+    nav a::after {
+      content: "✨";
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      font-size: 18px;
+      pointer-events: none;
+    }
+    nav a:hover {
+      background: linear-gradient(45deg, #00d2ff, #3a47d5);
+      color: #fff;
+      transform: scale(1.15) rotate(-2deg);
+      box-shadow:
+        0 0 12px #4dc9ff,
+        0 0 22px #005eff,
+        0 0 35px #1a6cff;
+      z-index: 10;
+    }
+    nav a:hover::after {
+      opacity: 1;
+      animation: sparkle 1.5s linear infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: translateY(-50%) rotate(0deg); }
+      50% { opacity: 0.5; transform: translateY(-52%) rotate(20deg); }
+    }
+
+    .container {
+      flex: 1;
+      max-width: 1100px;
+      margin: 60px auto 80px;
+      padding: 50px 45px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      box-shadow:
+        0 12px 45px rgba(255, 90, 90, 0.3),
+        inset 0 0 12px #ff8a8a;
+      user-select: none;
+    }
+    h2 {
+      text-align: center;
+      font-size: 3.3rem;
+      color: #ff4e50;
+      margin-bottom: 52px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-shadow:
+        0 0 8px #ff4e50,
+        0 0 20px #ffb3b3,
+        0 0 30px #ff4e50;
+      animation: glowPulse 3s infinite ease-in-out;
+    }
+    .food-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+    .food-item {
+      background: linear-gradient(145deg, #fff0ec, #ffe2e2);
+      border: 3px solid #ff6b6b;
+      border-radius: 24px;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 23px;
+      font-weight: 800;
+      color: #d9534f;
+      cursor: pointer;
+      box-shadow:
+        6px 6px 18px rgba(255, 100, 100, 0.25),
+        inset 0 0 18px #ffbaba;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+    }
+    .food-item::before {
+      content: "🍽️";
+      position: absolute;
+      top: -20px;
+      left: 15px;
+      font-size: 32px;
+      opacity: 0.15;
+      pointer-events: none;
+      user-select: none;
+    }
+    .food-item:hover {
+      transform: scale(1.15) rotate(-2deg);
+      box-shadow:
+        0 20px 40px rgba(255, 75, 75, 0.6),
+        inset 0 0 28px #ff6b6b,
+        0 0 18px #ff4e50;
+      color: #fff;
+      border-color: #ff4e50;
+      text-shadow:
+        0 0 12px #fff,
+        0 0 22px #ff4e50;
+      z-index: 5;
+    }
+    .food-item.selected {
+      background: linear-gradient(90deg, #4caf50, #45a049);
+      color: #fff;
+      border-color: #37b24d;
+      box-shadow:
+        0 0 30px #32cd32,
+        inset 0 0 20px #2ca02c;
+      animation: glowPulse 2.8s infinite ease-in-out;
+    }
+    .other-food-btn {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      font-size: 23px;
+      font-weight: 700;
+      border: none;
+      border-radius: 28px;
+      padding: 28px 38px;
+      cursor: pointer;
+      grid-column: 1 / -1;
+      user-select: none;
+      box-shadow:
+        0 10px 30px rgba(0, 198, 255, 0.6),
+        inset 0 0 25px #0072ff;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .other-food-btn::after {
+      content: "✨";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 26px;
+      animation: sparkle 2.2s linear infinite;
+      pointer-events: none;
+    }
+    .other-food-btn:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 14px 40px rgba(0, 198, 255, 0.9),
+        inset 0 0 30px #00aaff;
+    }
+    #new-food-input {
+      display: none;
+      margin: 40px auto 0;
+      width: 100%;
+      max-width: 480px;
+      padding: 20px 26px;
+      font-size: 21px;
+      font-weight: 700;
+      border: 4px solid #00c6ff;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow:
+        0 0 15px #00c6ff;
+      color: #005f99;
+      outline: none;
+      user-select: text;
+      transition: box-shadow 0.3s ease;
+    }
+    #new-food-input:focus {
+      box-shadow:
+        0 0 24px #00d4ff,
+        0 0 48px #007cff;
+    }
+
+    /* Scroll bar for input */
+    #new-food-input::-webkit-scrollbar {
+      height: 8px;
+    }
+    #new-food-input::-webkit-scrollbar-thumb {
+      background: #00c6ff;
+      border-radius: 6px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>🍴 موقع الإعلانات - أكل</header>
+
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="food.html" aria-current="page">الأكل</a>
+    <a href="items.html">مقتنيات</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+
+  <div class="container">
+    <h2>أصناف الأكل الخيالية</h2>
+    <div class="food-list" id="food-list">
+      <div class="food-item" tabindex="0">برجر</div>
+      <div class="food-item" tabindex="0">شاورما</div>
+      <div class="food-item" tabindex="0">بيتزا</div>
+      <div class="food-item" tabindex="0">زنجر</div>
+      <div class="food-item" tabindex="0">رز</div>
+      <div class="food-item" tabindex="0">دجاج مقلي</div>
+      <button class="other-food-btn" id="other-food-btn">🍽️ أكل آخر</button>
+    </div>
+    <input type="text" id="new-food-input" placeholder="اكتب صنفًا جديدًا واضغط Enter" />
+  </div>
+
+  <script>
+    const otherBtn = document.getElementById('other-food-btn');
+    const newFoodInput = document.getElementById('new-food-input');
+    const foodList = document.getElementById('food-list');
+
+    otherBtn.addEventListener('click', () => {
+      newFoodInput.style.display = 'block';
+      newFoodInput.focus();
+    });
+
+    function selectFoodItem(element) {
+      document.querySelectorAll('.food-item').forEach(item => item.classList.remove('selected'));
+      element.classList.add('selected');
+      localStorage.setItem('selectedItem', element.textContent);
+    }
+
+    newFoodInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const newFood = newFoodInput.value.trim();
+        if (newFood) {
+          // تحقق من وجود الصنف لتجنب التكرار
+          const exists = Array.from(document.querySelectorAll('.food-item')).some(item => item.textContent === newFood);
+          if (!exists) {
+            const newFoodItem = document.createElement('div');
+            newFoodItem.classList.add('food-item');
+            newFoodItem.textContent = newFood;
+            newFoodItem.tabIndex = 0;
+            foodList.insertBefore(newFoodItem, otherBtn);
+
+            newFoodItem.addEventListener('click', (e) => {
+              selectFoodItem(e.currentTarget);
+              window.location.href = 'contact.html';
+            });
+
+            selectFoodItem(newFoodItem);
+
+            newFoodInput.value = '';
+            newFoodInput.style.display = 'none';
+
+            setTimeout(() => {
+              window.location.href = 'contact.html';
+            }, 250);
+
+          } else {
+            alert('هذا الصنف موجود بالفعل!');
+            newFoodInput.value = '';
+          }
+        }
+      }
+    });
+
+    window.onload = () => {
+      const selected = localStorage.getItem('selectedItem');
+      if (selected) {
+        document.querySelectorAll('.food-item').forEach(item => {
+          if (item.textContent === selected) {
+            item.classList.add('selected');
+          }
+        });
+      }
+
+      document.querySelectorAll('.food-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          selectFoodItem(e.currentTarget);
+          window.location.href = 'contact.html';
+        });
+      });
+    };
+  </script>
+
+</body>
+</html>
+
+
+
+
+<head>
+  <meta charset="UTF-8" />
+  <title>✨ مقتنيات - موقع الإعلانات الخيالي</title>
+
+  <!-- ✅ دعم أجهزة iOS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon.png"> <!-- ضع صورة أيقونة باسم icon.png -->
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+    /* بقية التنسيقات كما في كودك تمامًا بدون تغيير */

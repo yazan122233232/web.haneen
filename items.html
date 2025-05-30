@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar" >
+<head>
+  <meta charset="UTF-8" />
+  <title>✨ مقتنيات - موقع الإعلانات الخيالي</title>
+  <style>
+
+
+
+
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body with animated gradient background */
+    body {
+      font-family: 'Cairo', Tahoma, sans-serif;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(-45deg, #7b1fa2, #4a148c, #880e4f, #311b92);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #eee;
+      overflow-x: hidden;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      padding: 20px 10px 60px;
+    }
+    body.loaded {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @keyframes gradientBG {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Neon text effect for header */
+    header {
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-align: center;
+      text-shadow:
+        0 0 5px #ea80fc,
+        0 0 10px #ea80fc,
+        0 0 20px #ea80fc,
+        0 0 40px #d500f9,
+        0 0 80px #d500f9,
+        0 0 90px #d500f9;
+      margin-bottom: 30px;
+      user-select: none;
+      letter-spacing: 6px;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 10px #ea80fc,
+          0 0 20px #ea80fc,
+          0 0 40px #d500f9,
+          0 0 80px #d500f9;
+      }
+      50% {
+        text-shadow:
+          0 0 20px #f48fb1,
+          0 0 40px #f48fb1,
+          0 0 60px #d500f9,
+          0 0 120px #d500f9;
+      }
+    }
+
+    /* Navigation bar */
+    nav {
+      background: rgba(255 255 255 / 0.05);
+      padding: 12px 0;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      box-shadow:
+        0 0 20px rgba(255 255 255 0.15),
+        inset 0 0 8px rgba(255 255 255 0.2);
+      margin-bottom: 40px;
+      user-select: none;
+    }
+
+    nav a {
+      color: #d1bee7;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1.2px;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, #d500f9, transparent);
+      transition: all 0.4s ease;
+      z-index: 0;
+    }
+
+    nav a:hover {
+      color: #fff;
+      box-shadow:
+        0 0 15px #ea80fc,
+        0 0 30px #d500f9;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    /* Container card with glassmorphism and neon glow */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255 255 255 / 0.08);
+      border-radius: 30px;
+      padding: 40px 30px;
+      box-shadow:
+        0 0 40px #d500f9,
+        inset 0 0 40px rgba(255 255 255, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(213,0,249,0.5), transparent 70%);
+      animation: spin 25s linear infinite;
+      z-index: 0;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #d1bee7;
+      text-align: center;
+      margin-bottom: 45px;
+      letter-spacing: 3px;
+      text-shadow:
+        0 0 6px #ea80fc,
+        0 0 12px #d500f9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Buttons container */
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 26px;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Button style with neon borders and glow */
+    button.item-btn {
+      background: linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%);
+      border: 2px solid #d500f9;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.25rem;
+      padding: 22px 50px;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow:
+        0 0 8px #d500f9,
+        0 0 12px #ea80fc,
+        0 0 15px #d500f9;
+      transition: all 0.35s ease;
+      flex: 1 1 260px;
+      max-width: 280px;
+      letter-spacing: 1.5px;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    button.item-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(234,128,252,0.3), transparent 70%);
+      filter: blur(20px);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    button.item-btn:hover::before {
+      opacity: 1;
+    }
+
+    button.item-btn:hover {
+      background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+      box-shadow:
+        0 0 18px #ea80fc,
+        0 0 30px #d500f9,
+        0 0 40px #ea80fc;
+      transform: scale(1.06);
+      color: #fff;
+      text-shadow: 0 0 6px #d500f9;
+      z-index: 1;
+    }
+
+    button.item-btn.selected {
+      background: linear-gradient(135deg, #00e676, #00c853);
+      border-color: #00c853;
+      box-shadow:
+        0 0 22px #00e676,
+        0 0 40px #00c853;
+      transform: scale(1.1);
+      color: #e6ffe6;
+      text-shadow:
+        0 0 10px #00e676;
+    }
+
+    button.item-btn:active {
+      transform: scale(0.95);
+      box-shadow:
+        0 0 25px #d500f9 inset;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    /* Input style with glowing border */
+    #new-item-input {
+      display: none;
+      margin: 50px auto 0;
+      padding: 18px 25px;
+      font-size: 1.3rem;
+      border-radius: 30px;
+      border: 3px solid #d500f9;
+      width: 100%;
+      max-width: 520px;
+      background-color: rgba(255 255 255 / 0.12);
+      color: #eee;
+      box-shadow:
+        0 0 15px #ea80fc;
+      outline: none;
+      text-align: center;
+      user-select: text;
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+    }
+
+    #new-item-input::placeholder {
+      color: #d1bee7;
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    #new-item-input:focus {
+      background-color: rgba(255 255 255 / 0.3);
+      border-color: #f50057;
+      box-shadow:
+        0 0 30px #f50057,
+        0 0 45px #ea80fc;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        font-size: 2.4rem;
+        letter-spacing: 4px;
+      }
+      nav a {
+        font-size: 1rem;
+        padding: 10px 18px;
+      }
+      button.item-btn {
+        font-size: 1.1rem;
+        padding: 18px 35px;
+        max-width: 100%;
+      }
+      #new-item-input {
+        font-size: 1.1rem;
+      }
+    }
+
+    
+  </style>
+</head>
+<body>
+
+  <header>
+    موقع الإعلانات - مقتنيات ✨
+  </header>
+
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="food.html">أكل</a>
+    <a href="items.html">مقتنيات</a>
+    <a href="contact.html">تواصل</a>
+  </nav>
+
+  <div class="container">
+    <h2>أصناف المقتنيات</h2>
+
+    <div class="buttons" role="list">
+      <button class="item-btn" role="listitem" aria-label="مستحضرات تجميل">مستحضرات تجميل</button>
+      <button class="item-btn" id="other-item-btn" role="listitem" aria-label="أغراض أخرى">أغراض أخرى</button>
+    </div>
+
+    <input type="text" id="new-item-input" placeholder="اكتب اسم الصنف الجديد واضغط Enter" aria-label="إضافة صنف جديد" />
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    const otherBtn = document.getElementById('other-item-btn');
+    const newItemInput = document.getElementById('new-item-input');
+    const buttonsContainer = document.querySelector('.buttons');
+    let selectedBtn = null;
+
+    otherBtn.addEventListener('click', () => {
+      newItemInput.style.display = 'block';
+      newItemInput.focus();
+    });
+
+    newItemInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const newItem = newItemInput.value.trim();
+        if(newItem) {
+          const newBtn = document.createElement('button');
+          newBtn.classList.add('item-btn');
+          newBtn.textContent = newItem;
+          buttonsContainer.insertBefore(newBtn, otherBtn);
+          newItemInput.value = '';
+          newItemInput.style.display = 'none';
+
+          newBtn.addEventListener('click', selectButton);
+          newBtn.addEventListener('dblclick', () => {
+            saveAndGo(newBtn.textContent);
+          });
+        }
+      }
+    });
+
+    function selectButton(e) {
+      document.querySelectorAll('.item-btn').forEach(btn => btn.classList.remove('selected'));
+      e.currentTarget.classList.add('selected');
+      selectedBtn = e.currentTarget;
+    }
+
+    function saveAndGo(itemName) {
+      localStorage.setItem('selectedItem', itemName);
+      window.location.href = 'contact.html';
+    }
+
+    document.querySelectorAll('.item-btn').forEach(btn => {
+      btn.addEventListener('click', selectButton);
+      btn.addEventListener('dblclick', () => {
+        saveAndGo(btn.textContent);
+      });
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8" />
+  <title>✨ مقتنيات - موقع الإعلانات الخيالي</title>
+
+  <!-- ✅ دعم أجهزة iOS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon.png"> <!-- ضع صورة أيقونة باسم icon.png -->
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+    /* بقية التنسيقات كما في كودك تمامًا بدون تغيير */
+
+
+
+
+   
+
